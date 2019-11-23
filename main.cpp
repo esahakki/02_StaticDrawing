@@ -229,8 +229,64 @@ void DrawCheckerPattern()
 }
 void DrawColorBand()
 {
+	// Colourpattern
+	// • First Draw 9 rectangles that are 4 times higher 
+	//   than they are wide in different colors.
+	//   Do not forget the yellow border.
+	// • After that, darken the lower half by drawing 
+	//   a filled dark rectangle using a color that has 
+	//   an alpha component that is less than 255.
 
+	float basex{ 250.f }, basey{ 210.0f }; //left low corner
+	int box{ 20 }; // Size of each checker pattern box
+
+	float c[9][3]{			// Bitmap for colour slide.
+		{ 0.f, 0.f, 0.f },
+		{ 1.f, 0.f, 0.f },
+		{ 0.f, 1.f, 0.f },
+		{ 0.f, 0.f, 1.f },
+		{ 1.f, 0.f, 1.f },
+		{ 1.f, 1.f, 0.f },
+		{ 0.f, 1.f, 1.f },
+		{ 0.f, 1.f, 0.5f },
+		{ 1.f, 1.f, 1.f }
+	};
+
+	glLineWidth(0.0f);
+
+	// Background colour palette
+	for (int i = 0; i <= 8; i++)
+	{
+		glColor3f(c[i][0], c[i][1], c[i][2]);
+		glBegin(GL_POLYGON);
+		glVertex2f(basex + i*box + 0.0f, basey + 0.0f);
+		glVertex2f(basex + i*box + box,  basey + 0.0f);
+		glVertex2f(basex + i*box + box,  basey + 4*box);
+		glVertex2f(basex + i*box + 0.0f, basey + 4*box);
+		glEnd();
+	}
+
+	// Background shading solid box, alpha=25%
+	glColor4f(0.f,0.f,0.f,0.5f);
+	glBegin(GL_POLYGON);
+		glVertex2f(basex + 0.0f, basey + 0.0f);
+		glVertex2f(basex + 9 * box, basey + 0.0f);
+		glVertex2f(basex + 9 * box, basey + 2 * box);
+		glVertex2f(basex + 0.0f, basey + 2 * box);
+	glEnd();
+
+	// box cutout on foreground
+	glColor3f(255.0f / 255.f, 255.f / 255.f, 0.f / 255.f);
+	glLineWidth(2.0f);
+	glBegin(GL_LINE_LOOP);
+	glVertex2f(basex + 0.0f, basey + 0.0f);
+	glVertex2f(basex + 9 * box, basey + 0.0f);
+	glVertex2f(basex + 9 * box, basey + 4 * box);
+	glVertex2f(basex + 0.0f, basey + 4 * box);
+	glEnd();
+	return;
 }
+
 void DrawPentagram()
 {
 
