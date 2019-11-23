@@ -147,11 +147,85 @@ void DrawHouse()
 
 void DrawFlag()
 {
+	// BE Flag
+	float basex{ 10.f }, basey{ 115.0f }; //left low corner
+	
+	// first box, background
+	glColor3f(0.0f / 255.f, 0.f / 255.f, 0.f / 255.f);
+	glLineWidth(0.0f);
+	glBegin(GL_POLYGON);
+	glVertex2f(basex + 0.0f, basey + 0.0f);
+	glVertex2f(basex + 66.0f, basey + 0.0f);
+	glVertex2f(basex + 66.0f, basey + 80.0f);
+	glVertex2f(basex + 0.0f, basey + 80.0f);
+	glEnd();
 
+	// second box, background
+	glColor3f(255.0f / 255.f, 255.f / 255.f, 0.f / 255.f);
+	glLineWidth(0.0f);
+	glBegin(GL_POLYGON);
+	glVertex2f(basex + 66.0f, basey + 0.0f);
+	glVertex2f(basex + 133.0f, basey + 0.0f);
+	glVertex2f(basex + 133.0f, basey + 80.0f);
+	glVertex2f(basex + 66.0f, basey + 80.0f);
+	glEnd();
+
+	// third box, background
+	glColor3f(255.0f / 255.f, 0.f / 255.f, 0.f / 255.f);
+	glLineWidth(0.0f);
+	glBegin(GL_POLYGON);
+	glVertex2f(basex + 133.0f, basey + 0.0f);
+	glVertex2f(basex + 200.0f, basey + 0.0f);
+	glVertex2f(basex + 200.0f, basey + 80.0f);
+	glVertex2f(basex + 133.0f, basey + 80.0f);
+	glEnd();
+
+
+	// foreground
+	glColor3f(255.0f / 255.f, 255.f / 255.f, 255.f / 255.f);
+	glLineWidth(1.0f);
+	glBegin(GL_LINE_LOOP);
+	glVertex2f(basex + 0.0f, basey + 0.0f);
+	glVertex2f(basex + 200.0f, basey + 0.0f);
+	glVertex2f(basex + 200.0f, basey + 80.0f);
+	glVertex2f(basex + 0.0f, basey + 80.0f);
+	glEnd();
+	return; 
 }
 void DrawCheckerPattern()
 {
+	// Checkerpattern
+	float basex{ 10.f }, basey{ 10.0f }; //left low corner
+	int box{ 30 }; // Size of each checker pattern box
+	float c{ 0.0f }; // 0.0f = black
+	glLineWidth(0.0f);
 
+	for (int i = 0; i < box*3; i+=box)
+	{
+		for (int j = 0; j < box*3; j+=box)
+		{
+			glColor3f(c, c, c);
+			glBegin(GL_POLYGON);
+			glVertex2f(basex + i + 0.0f, basey + j + 0.0f);
+			glVertex2f(basex + i + box,  basey + j + 0.0f);
+			glVertex2f(basex + i + box,  basey + j + box);
+			glVertex2f(basex + i + 0.0f, basey + j + box);
+			glEnd();
+			c = float(!c); // inverse colour for next round.
+		}
+
+	}
+
+	// box cutout on foreground
+	glColor3f(255.0f / 255.f, 255.f / 255.f, 255.f / 255.f);
+	glLineWidth(1.0f);
+	glBegin(GL_LINE_LOOP);
+	glVertex2f(basex + 0.0f, basey + 0.0f);
+	glVertex2f(basex + 3*box, basey + 0.0f);
+	glVertex2f(basex + 3*box, basey + 3*box);
+	glVertex2f(basex + 0.0f, basey + 3*box);
+	glEnd();
+	return;
 }
 void DrawColorBand()
 {
