@@ -289,27 +289,7 @@ void DrawColorBand()
 
 void DrawPentagram()
 {
-	float basex{ 300.f }, basey{ 100.0f }; //left low corner
-	struct Vertices { float x; float y; } v[5];
-	float angle{ 90.0f };
-	float radius{ 30.0f };
 
-	for (int i = 0; i < 5; i++)	// find x/y coordinates of pentagram corners
-	{
-		// https://www.101computing.net/pentagram-challenge/
-		// starting from angle, every 72 degrees, to radians
-		v[i].x = basex + float(radius * cos(M_PI / 180 * (angle + 72 * i)));
-		v[i].y = basey + float(radius * sin(M_PI / 180 * (angle + 72 * i)));
-	}
-
-	glColor3f(1.f, 0.f, 0.2f);	// drawing colour of the Vertices
-	glLineWidth(2.0f);
-	glBegin(GL_LINE_LOOP);
-	for (int i = 0; i < 5*2; i+=2)	// take every 2nd corner of 
-	{
-		glVertex2f(v[i%5].x, v[i%5].y);
-	}
-	glEnd();
 }
 void DrawColumnChart()
 {
