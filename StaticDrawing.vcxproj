@@ -167,7 +167,8 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="02_StaticDrawing.png" />
+    <Image Include="02_StaticDrawing example.png" />
+    <Image Include="02_StaticDrawing result.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

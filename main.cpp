@@ -289,7 +289,7 @@ void DrawColorBand()
 
 void DrawPentagram()
 {
-	float basex{ 300.f }, basey{ 100.0f }; //left low corner
+	float basex{ 350.f }, basey{ 150.0f }; //left low corner
 	struct Vertices { float x; float y; } v[5];
 	float angle{ 90.0f };
 	float radius{ 30.0f };
@@ -313,7 +313,39 @@ void DrawPentagram()
 }
 void DrawColumnChart()
 {
+	float basex{ 250.f }, basey{ 10.0f };	// left low corner
+	int box{ 30 };			// width of each box
+	float c[4][3]{			// Bitmap for colour slide.
+		{ 0.15f, 0.25f, 0.25f },
+		{ 0.18f, 0.56f, 0.78f },
+		{ 0.23f, 0.72f, 1.00f },
+		{ 0.16f, 0.50f, 0.78f }
+	};
+	float h[4]{ 100.0f,80.0f,60.0f,20.0f };		// height data.
 
+	std::cout << "% people playing games?" << std::endl;
+	std::cout << "In the range [0, 20]? ";
+	std::cin >> h[0];
+	std::cout << "In the range [21, 40]? ";
+	std::cin >> h[1];
+	std::cout << "In the range [41, 60]? ";
+	std::cin >> h[2];
+	std::cout << "Older than 60? ";
+	std::cin >> h[3];
+	std::cin.ignore();
+
+	glLineWidth(0.0f);
+	// bars drawing loop
+	for (int i = 0; i <= 3; i++)
+	{
+		glColor3f(c[i][0], c[i][1], c[i][2]);
+		glBegin(GL_POLYGON);
+		glVertex2f(basex + i * box + 0.0f, basey + 0.0f);
+		glVertex2f(basex + i * box + box, basey + 0.0f);
+		glVertex2f(basex + i * box + box, basey + h[i] * 0.5f);
+		glVertex2f(basex + i * box + 0.0f, basey + h[i] * 0.5f);
+		glEnd();
+	}
 }
 #pragma endregion gameImplementations
 
